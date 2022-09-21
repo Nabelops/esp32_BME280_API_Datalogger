@@ -5,12 +5,10 @@
 #include <ArduinoJson.h>
 #include <HTTPClient.h>
 
-
 #define SEALEVELPRESSURE_HPA (1013.25)
 #define uS_TO_S_FACTOR 1000000ULL
 #define PIN_I2C_POWER 7
 
-// Adafruit_LC709203F lc;
 Adafruit_BME280 bme;
 Adafruit_LC709203F lc;
 StaticJsonDocument<200> doc;
@@ -18,11 +16,8 @@ HTTPClient http;
 
 unsigned long delayTime;
 
-const char* ssid = "Brandfox-Employee";
-const char* password = "bfoxroxursox";
-
-// const char* ssid = "McD Home";
-// const char* password = "7173416066";
+const char* ssid = "Example_SSID";
+const char* password = "examplePassword";
 
 void setup() {
   Serial.begin(115200);
@@ -84,7 +79,7 @@ void mapData() {
 }
 
 void postData() {
-  http.begin("https://us-central1-brandfox-solutions.cloudfunctions.net/tempSensor");  
+  http.begin("https://someAPIendpoint.cloudfunctions.net/tempSensor");  
   http.addHeader("Content-Type", "application/json"); 
   String requestBody;
   serializeJson(doc, requestBody);
